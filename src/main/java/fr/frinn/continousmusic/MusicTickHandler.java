@@ -3,10 +3,7 @@ package fr.frinn.continousmusic;
 import java.util.Random;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
-import net.minecraft.client.audio.MusicTicker;
-import net.minecraft.client.audio.PositionedSoundRecord;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.client.audio.*;
 
 public class MusicTickHandler extends MusicTicker {
 	
@@ -21,19 +18,19 @@ public class MusicTickHandler extends MusicTicker {
 	}
 	
 	@Override
-	public void update() {
+	public void tick() {
 		
 		MusicTicker.MusicType musictype = this.mc.getAmbientMusicType();
 
         if (this.currentMusic != null)
         {
-            if (!musictype.getMusicLocation().getSoundName().equals(this.currentMusic.getSoundLocation()))
+            if (!musictype.getSound().getName().equals(this.currentMusic.getSoundLocation()))
             {
-                this.mc.getSoundHandler().stopSound(this.currentMusic);
+                this.mc.getSoundHandler().stop(this.currentMusic);
                 this.timeUntilNextMusic = 20;
             }
 
-            if (!this.mc.getSoundHandler().isSoundPlaying(this.currentMusic))
+            if (!this.mc.getSoundHandler().isPlaying(this.currentMusic))
             {
                 this.currentMusic = null;
                 this.timeUntilNextMusic = 20;
@@ -42,8 +39,8 @@ public class MusicTickHandler extends MusicTicker {
 
         if (this.currentMusic == null && this.timeUntilNextMusic-- <= 0)
         {
-        	this.currentMusic = PositionedSoundRecord.getMusicRecord(musictype.getMusicLocation());
-        	this.mc.getSoundHandler().playSound(this.currentMusic);
+        	this.currentMusic = SimpleSound.music(musictype.getSound());
+        	this.mc.getSoundHandler().play(this.currentMusic);
             this.timeUntilNextMusic = 20;
         }
 	}
