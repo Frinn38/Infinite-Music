@@ -1,13 +1,9 @@
 package fr.frinn.continousmusic;
 
-import java.util.Random;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.*;
 
 public class MusicTickHandler extends MusicTicker {
-	
-	private final Random rand = new Random();
 	private final Minecraft mc;
     private ISound currentMusic;
     private int timeUntilNextMusic = 20;
@@ -19,7 +15,6 @@ public class MusicTickHandler extends MusicTicker {
 	
 	@Override
 	public void tick() {
-		
 		MusicTicker.MusicType musictype = this.mc.getAmbientMusicType();
 
         if (this.currentMusic != null)
