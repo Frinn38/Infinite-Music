@@ -26,7 +26,7 @@ public class ContinousMusic {
     	//Replace the vanilla music ticker with custom one
     	try {
     		for(Field f : mc.getClass().getDeclaredFields()) {
-    			if(f.getName().equals("mcMusicTicker") || f.getName().equals("field_147126_aw")) {
+    			if(f.getName().equals("musicTicker") || f.getName().equals("field_147126_aw")) {
     				f.setAccessible(true);
     				f.set(mc, ticker);
     			}
