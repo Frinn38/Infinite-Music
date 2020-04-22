@@ -20,8 +20,6 @@ public class MusicTickHandler extends MusicTracker {
 	
 	@Override
 	public void tick() {
-	    System.out.println(timeUntilNextMusic);
-		
 		MusicTracker.MusicType musictype = this.mc.getMusicType();
 
         if (this.currentMusic != null)
