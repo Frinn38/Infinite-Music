@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "infinitemusic",
+  "version": "1.0.0",
+
+  "name": "Infinite Music",
+  "description": "Now Minecraft keeps playing music in Fabric too !",
+  "authors": [
+    "Wolfgang Amadeus Mozard"
+  ],
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "fr.frinn.continousmusic.ContinousMusic"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.15.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
