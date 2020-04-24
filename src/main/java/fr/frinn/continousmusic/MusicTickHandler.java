@@ -1,7 +1,6 @@
 package fr.frinn.continousmusic;
 
-import java.util.Random;
-
+import net.minecraft.class_5195;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.PositionedSoundInstance;
@@ -20,11 +19,11 @@ public class MusicTickHandler extends MusicTracker {
 	
 	@Override
 	public void tick() {
-		MusicTracker.MusicType musictype = this.mc.getMusicType();
+		class_5195 musictype = this.mc.getMusicType();
 
         if (this.currentMusic != null)
         {
-            if (!musictype.getSound().getId().equals(this.currentMusic.getId()))
+            if (!musictype.method_27279().getId().equals(this.currentMusic.getId()))
             {
                 this.mc.getSoundManager().stop(this.currentMusic);
                 this.timeUntilNextMusic = 20;
@@ -39,7 +38,7 @@ public class MusicTickHandler extends MusicTracker {
 
         if (this.currentMusic == null && this.timeUntilNextMusic-- <= 0)
         {
-        	this.currentMusic = PositionedSoundInstance.music(musictype.getSound());
+        	this.currentMusic = PositionedSoundInstance.music(musictype.method_27279());
         	this.mc.getSoundManager().play(this.currentMusic);
             this.timeUntilNextMusic = 20;
         }
