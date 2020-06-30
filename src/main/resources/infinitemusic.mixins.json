@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.frinn.infinitemusic.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+  ],
+  "client": [
+    "SoundOptionsScreenMixin",
+    "MinecraftMixin",
+    "GameOptionsMixin",
+    "SoundSystemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

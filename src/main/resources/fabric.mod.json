@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "infinitemusic",
-  "version": "1.0.0",
+  "version": "1.1.0",
 
   "name": "Infinite Music",
   "description": "Now Minecraft keeps playing music in Fabric too !",
@@ -12,10 +12,11 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "fr.frinn.continousmusic.ContinousMusic"
+      "fr.frinn.infinitemusic.InfiniteMusic"
     ]
   },
   "mixins": [
+    "infinitemusic.mixins.json"
   ],
 
   "depends": {
