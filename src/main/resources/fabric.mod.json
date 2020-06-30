@@ -12,10 +12,11 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "fr.frinn.continousmusic.ContinousMusic"
+      "fr.frinn.infinitemusic.InfiniteMusic"
     ]
   },
   "mixins": [
+    "infinitemusic.mixins.json"
   ],
 
   "depends": {
