@@ -10,10 +10,10 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 public class MusicTickHandler extends MusicTracker {
 
 	private final MinecraftClient mc;
-    private SoundInstance currentMusic;
-    private int timeUntilNextMusic = ((IExtendedGameOptions)MinecraftClient.getInstance().options).getTimer() * 20;
+  private SoundInstance currentMusic;
+  private int timeUntilNextMusic = ((IExtendedGameOptions)MinecraftClient.getInstance().options).getTimer() * 20;
 
-    float prevTickMusicVolume;
+  float prevTickMusicVolume;
 
 	public MusicTickHandler(MinecraftClient mc) {
 		super(mc);
