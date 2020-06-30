@@ -4,8 +4,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.client.sound.SoundInstance;
+import net.minecraft.sound.MusicSound;
 import net.minecraft.sound.SoundCategory;
-import org.apache.commons.lang3.reflect.FieldUtils;
 
 public class MusicTickHandler extends MusicTracker {
 
@@ -22,10 +22,10 @@ public class MusicTickHandler extends MusicTracker {
 	
 	@Override
 	public void tick() {
-		MusicTracker.MusicType musictype = this.mc.getMusicType();
+		MusicSound musictype = this.mc.getMusicType();
         if (this.currentMusic != null)
         {
-            if (!musictype.getSound().getId().equals(this.currentMusic.getId()))
+            if (!musictype.getEvent().getId().equals(this.currentMusic.getId()))
             {
                 this.mc.getSoundManager().stop(this.currentMusic);
                 this.timeUntilNextMusic = ((IExtendedGameOptions)mc.options).getTimer() * 20;
@@ -47,7 +47,7 @@ public class MusicTickHandler extends MusicTracker {
         if (this.currentMusic == null) {
             this.timeUntilNextMusic--;
             if(this.timeUntilNextMusic <= 0) {
-                this.currentMusic = PositionedSoundInstance.music(musictype.getSound());
+                this.currentMusic = PositionedSoundInstance.music(musictype.getEvent());
                 this.mc.getSoundManager().play(this.currentMusic);
                 this.timeUntilNextMusic = ((IExtendedGameOptions)mc.options).getTimer() * 20;
             }

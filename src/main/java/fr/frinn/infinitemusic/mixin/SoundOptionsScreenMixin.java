@@ -21,7 +21,7 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
     , (settings, value) -> {
         ((IExtendedGameOptions)settings).setTimer(value.intValue());
         settings.write();
-    }, (settings, slider) -> slider.getDisplayPrefix() + ((IExtendedGameOptions)settings).getTimer() + "s");
+    }, (settings, slider) -> slider.getDisplayPrefix().append(((IExtendedGameOptions)settings).getTimer() + "s"));
 
     public SoundOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
         super(parent, gameOptions, title);
