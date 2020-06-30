@@ -1,4 +1,4 @@
-package fr.frinn.continousmusic;
+package fr.frinn.infinitemusic;
 
 import net.minecraft.class_5195;
 import net.minecraft.client.MinecraftClient;

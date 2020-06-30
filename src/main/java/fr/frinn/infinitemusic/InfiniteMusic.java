@@ -1,4 +1,4 @@
-package fr.frinn.continousmusic;
+package fr.frinn.infinitemusic;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
@@ -7,7 +7,7 @@ import net.minecraft.util.crash.CrashException;
 import net.minecraft.util.crash.CrashReport;
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-public class ContinousMusic implements ClientModInitializer {
+public class InfiniteMusic implements ClientModInitializer {
 
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 	
