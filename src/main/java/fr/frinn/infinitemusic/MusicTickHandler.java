@@ -25,7 +25,7 @@ public class MusicTickHandler extends MusicTracker {
 		MusicSound musictype = this.mc.getMusicType();
         if (this.currentMusic != null)
         {
-            if (!musictype.getEvent().getId().equals(this.currentMusic.getId()))
+            if (!musictype.getSound().getId().equals(this.currentMusic.getId()))
             {
                 this.mc.getSoundManager().stop(this.currentMusic);
                 this.timeUntilNextMusic = ((IExtendedGameOptions)mc.options).getTimer() * 20;
@@ -47,7 +47,7 @@ public class MusicTickHandler extends MusicTracker {
         if (this.currentMusic == null) {
             this.timeUntilNextMusic--;
             if(this.timeUntilNextMusic <= 0) {
-                this.currentMusic = PositionedSoundInstance.music(musictype.getEvent());
+                this.currentMusic = PositionedSoundInstance.music(musictype.getSound());
                 this.mc.getSoundManager().play(this.currentMusic);
                 this.timeUntilNextMusic = ((IExtendedGameOptions)mc.options).getTimer() * 20;
             }

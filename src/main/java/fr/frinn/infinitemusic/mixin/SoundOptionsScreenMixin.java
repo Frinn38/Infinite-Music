@@ -8,6 +8,7 @@ import net.minecraft.client.gui.screen.options.SoundOptionsScreen;
 import net.minecraft.client.options.DoubleOption;
 import net.minecraft.client.options.GameOptions;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +22,7 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
     , (settings, value) -> {
         ((IExtendedGameOptions)settings).setTimer(value.intValue());
         settings.write();
-    }, (settings, slider) -> slider.getDisplayPrefix().append(((IExtendedGameOptions)settings).getTimer() + "s"));
+    }, (settings, slider) -> new TranslatableText("options.musicTimer").append(((IExtendedGameOptions)settings).getTimer() + "s"));
 
     public SoundOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
         super(parent, gameOptions, title);
