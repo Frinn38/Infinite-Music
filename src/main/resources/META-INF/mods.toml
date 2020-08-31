@@ -10,11 +10,13 @@ loaderVersion="[25,)" #mandatory (24 is current forge version)
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
+# License
+license="Academic Free License (AFL) v. 3.0"
 [[mods]] #mandatory
 # The modid of the mod
 modId="infinitemusic" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="1.1.1" #mandatory
+version="1.2.0" #mandatory
  # A display name for the mod
 displayName="Infinite Music" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display

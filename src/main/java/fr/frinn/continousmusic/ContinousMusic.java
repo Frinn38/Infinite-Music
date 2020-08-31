@@ -3,9 +3,12 @@ package fr.frinn.continousmusic;
 import java.lang.reflect.Field;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.OptionsSoundsScreen;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.SliderPercentageOption;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.ReportedException;
+import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -29,7 +32,7 @@ public class ContinousMusic {
 		ContinuousConfig.musicTimer = value;
 		ContinuousConfig.saveConfig();
 	}, (settings, slider) -> {
-		return slider.getDisplayString() + (int)ContinuousConfig.musicTimer + "s";
+		return new StringTextComponent(I18n.format("options.musicTimer") + ": " + (int)ContinuousConfig.musicTimer + "s");
 	});
 	
 	public ContinousMusic() {

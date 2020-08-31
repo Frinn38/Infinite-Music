@@ -16,11 +16,11 @@ public class MusicTickHandler extends MusicTicker {
 	
 	@Override
 	public void tick() {
-		MusicTicker.MusicType musictype = this.mc.getAmbientMusicType();
+		BackgroundMusicSelector musictype = this.mc.func_238178_U_();
 
         if (this.currentMusic != null)
         {
-            if (!musictype.getSound().getName().equals(this.currentMusic.getSoundLocation()))
+            if (!musictype.getSoundEvent().getName().equals(this.currentMusic.getSoundLocation()))
             {
                 this.mc.getSoundHandler().stop(this.currentMusic);
                 this.timeUntilNextMusic = ContinuousConfig.musicTimer * 20;
@@ -36,7 +36,7 @@ public class MusicTickHandler extends MusicTicker {
         if (this.currentMusic == null) {
             this.timeUntilNextMusic--;
             if(this.timeUntilNextMusic <= 0) {
-                this.currentMusic = SimpleSound.music(musictype.getSound());
+                this.currentMusic = SimpleSound.music(musictype.getSoundEvent());
                 this.mc.getSoundHandler().play(this.currentMusic);
                 this.timeUntilNextMusic = ContinuousConfig.musicTimer * 20;
             }
