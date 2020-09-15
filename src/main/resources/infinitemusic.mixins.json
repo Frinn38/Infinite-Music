@@ -7,9 +7,7 @@
   ],
   "client": [
     "SoundOptionsScreenMixin",
-    "MinecraftMixin",
-    "GameOptionsMixin",
-    "SoundSystemMixin"
+    "MusicTrackerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
