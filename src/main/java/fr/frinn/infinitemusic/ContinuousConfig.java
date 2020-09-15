@@ -1,4 +1,4 @@
-package fr.frinn.continousmusic;
+package fr.frinn.infinitemusic;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import org.apache.commons.lang3.tuple.Pair;
 
-@Mod.EventBusSubscriber(modid = ContinousMusic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = InfiniteMusic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ContinuousConfig {
     public static final ClientConfig CLIENT;
     public static final ForgeConfigSpec CLIENT_SPEC;
