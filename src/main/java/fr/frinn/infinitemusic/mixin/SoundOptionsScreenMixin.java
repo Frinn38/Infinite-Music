@@ -7,11 +7,11 @@ import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.ConfigManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.options.GameOptionsScreen;
-import net.minecraft.client.gui.screen.options.SoundOptionsScreen;
+import net.minecraft.client.gui.screen.option.GameOptionsScreen;
+import net.minecraft.client.gui.screen.option.SoundOptionsScreen;
 import net.minecraft.client.gui.widget.TexturedButtonWidget;
-import net.minecraft.client.options.DoubleOption;
-import net.minecraft.client.options.GameOptions;
+import net.minecraft.client.option.DoubleOption;
+import net.minecraft.client.option.GameOptions;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
@@ -38,19 +38,21 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
 
     @Inject(at = @At("HEAD"), method = "init()V")
     protected void init(CallbackInfo info) {
-        int i = 11;
-        this.addButton(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150));
-        this.addButton(new TexturedButtonWidget(
-                        this.width / 2 - 155 + i % 2 * 160 + 155,
-                        this.height / 6 - 12 + 24 * (i >> 1),
-                        20,
-                        20,
-                        0,
-                        0,
-                        20,
-                        new Identifier("infinitemusic", "textures/gui/buttons.png"),
-                        (button) -> InfiniteMusic.skip = true
-                )
-        );
+        // TODO: 1.17 removed this method, must replace
+        
+        // int i = 11;
+        // this.addButton(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150));
+        // this.addButton(new TexturedButtonWidget(
+        //                 this.width / 2 - 155 + i % 2 * 160 + 155,
+        //                 this.height / 6 - 12 + 24 * (i >> 1),
+        //                 20,
+        //                 20,
+        //                 0,
+        //                 0,
+        //                 20,
+        //                 new Identifier("infinitemusic", "textures/gui/buttons.png"),
+        //                 (button) -> InfiniteMusic.skip = true
+        //         )
+        // );
     }
 }
