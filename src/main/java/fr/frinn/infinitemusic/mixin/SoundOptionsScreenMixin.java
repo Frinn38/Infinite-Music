@@ -28,8 +28,7 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
     , (settings, value) -> {
         InfiniteConfig.getInstance().timer = value.intValue();
         ConfigHolder<InfiniteConfig> holder = AutoConfig.getConfigHolder(InfiniteConfig.class);
-        if(holder instanceof ConfigManager)
-            ((ConfigManager<InfiniteConfig>)holder).save();
+        holder.save();
     }, (settings, slider) -> new TranslatableText("options.musicTimer").append(": ").append(InfiniteConfig.getInstance().timer + "s"));
 
     public SoundOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
@@ -38,21 +37,18 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
 
     @Inject(at = @At("HEAD"), method = "init()V")
     protected void init(CallbackInfo info) {
-        // TODO: 1.17 removed this method, must replace
-        
-        // int i = 11;
-        // this.addButton(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150));
-        // this.addButton(new TexturedButtonWidget(
-        //                 this.width / 2 - 155 + i % 2 * 160 + 155,
-        //                 this.height / 6 - 12 + 24 * (i >> 1),
-        //                 20,
-        //                 20,
-        //                 0,
-        //                 0,
-        //                 20,
-        //                 new Identifier("infinitemusic", "textures/gui/buttons.png"),
-        //                 (button) -> InfiniteMusic.skip = true
-        //         )
-        // );
+        int i = 11;
+        this.addDrawableChild(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150));
+        this.addDrawableChild(new TexturedButtonWidget(
+            this.width / 2 - 155 + i % 2 * 160 + 155,
+            this.height / 6 - 12 + 24 * (i >> 1),
+            20,
+            20,
+            0,
+            0,
+            20,
+            new Identifier("infinitemusic", "textures/gui/buttons.png"),
+            (button) -> InfiniteMusic.skip = true)
+        );
     }
 }
