@@ -2,9 +2,9 @@ package fr.frinn.infinitemusic.mixin;
 
 import fr.frinn.infinitemusic.InfiniteConfig;
 import fr.frinn.infinitemusic.InfiniteMusic;
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
-import me.sargunvohra.mcmods.autoconfig1u.ConfigHolder;
-import me.sargunvohra.mcmods.autoconfig1u.ConfigManager;
+import me.shedaniel.autoconfig.AutoConfig;
+import me.shedaniel.autoconfig.ConfigHolder;
+import me.shedaniel.autoconfig.ConfigManager;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.options.GameOptionsScreen;
