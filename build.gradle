@@ -2,25 +2,26 @@ buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
+        maven { url = 'https://maven.parchmentmc.org' }
         maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.parchmentmc:librarian:1.+'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
-plugins {
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
-}
 apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'org.spongepowered.mixin'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.4.0'
-group = 'fr.frinn.infinitemusic' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'infinitemusic'
+version = "${mod_version}-${minecraft_version}"
+group = "${mod_base_package}.${mod_id}" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = mod_id
 
 // Mojang ships Java 16 to end users in 1.17+ instead of Java 8 in 1.16 or lower, so your mod should target Java 16.
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)
@@ -29,16 +30,17 @@ println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getPro
 minecraft {
     // The mappings can be changed at any time and must be in the following format.
     // Channel:   Version:
-    // snapshot   YYYYMMDD   Snapshot are built nightly.
-    // stable     #          Stables are built at the discretion of the MCP team.
-    // official   MCVersion  Official field/method names from Mojang mapping files
+    // snapshot   YYYYMMDD          Snapshot are built nightly.
+    // stable     #                 Stables are built at the discretion of the MCP team.
+    // official   MCVersion         Official field/method names from Mojang mapping files
+    // parchment  YYYY.MM.DD-MCVer  Javadocs and parameters layered on top of Mojmaps from the ParchmentMC team.
     //
-    // You must be aware of the Mojang license when using the 'official' mappings.
+    // You must be aware of the Mojang license when using the 'official' / 'parchment' mappings.
     // See more information here: https://github.com/MinecraftForge/MCPConfig/blob/master/Mojang.md
     //
     // Use non-default mappings at your own risk. They may not always work.
     // Simply re-run your setup task after changing the mappings to update your workspace.
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: mappings_channel, version: mappings_version
 
     // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg') // Currently, this location cannot be changed from the default.
 
@@ -60,13 +62,31 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
-            arg "-mixin.config=infinitemusic.mixins.json"
+            // Export mixin-changed classes
+            property 'mixin.debug.export', 'true'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            // These arguments allow for optional authentication with Mojang servers.
+            // If you want to authenticate, put these properties in GRADLE_HOME/gradle.properties.
+            // By default, this is C:\Users\<your username>\.gradle\gradle.properties on Windows or ~/.gradle/gradle.properties on Linux/MacOS.
+            if (project.hasProperty('mc_uuid')) {
+                // Your UUID, trimmed / without the dashes
+                args '--uuid', project.getProperty('mc_uuid')
+            }
+            if (project.hasProperty('mc_username')) {
+                // Your Minecraft in-game username, not email
+                args '--username', project.getProperty('mc_username')
+            }
+            if (project.hasProperty('mc_accessToken')) {
+                // Your current access token. When it expires, you need to retrieve a new one and regenerate your run configurations.
+                // You may be able to find it in your .minecraft folder in launcher_accounts.json or launcher_profiles.json.
+                args '--accessToken', project.getProperty('mc_accessToken')
+            }
+
+            // Add mixin config to runtime
+            args '-mixin.config=' + project.getProperty('mod_id') + '.mixins.json'
 
             mods {
-                examplemod {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -87,13 +107,14 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
-            arg "-mixin.config=infinitemusic.mixins.json"
+            // Export mixin-changed classes
+            property 'mixin.debug.export', 'true'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg"
+            // Add mixin config to runtime
+            args '-mixin.config=' + project.getProperty('mod_id') + '.mixins.json'
 
             mods {
-                examplemod {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -114,11 +135,17 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
+            // Export mixin-changed classes
+            property 'mixin.debug.export', 'true'
+
+            // Add mixin config to runtime
+            args '-mixin.config=' + project.getProperty('mod_id') + '.mixins.json'
+
             // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
-                examplemod {
+                "${mod_id}" {
                     source sourceSets.main
                 }
             }
@@ -139,11 +166,18 @@ repositories {
     // }
 }
 
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+}
+
 dependencies {
     // Specify the version of Minecraft to use. If this is any group other than 'net.minecraft', it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.59'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Mixin annotation processor - generates the refmap
+    annotationProcessor "org.spongepowered:mixin:${mixin_version}:processor"
 
     // Real mod deobf dependency examples - these get remapped to your current mappings
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
@@ -156,21 +190,48 @@ dependencies {
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    annotationProcessor "org.spongepowered:mixin:0.8.2:processor"
 }
 
-// Example for how to get properties into the manifest for reading at runtime.
+// This block of code expands all the gradle properties in the specified resource targets.
+// It copies them into the targets and expands all the defined properties.
+def resourceTargets = ['META-INF/mods.toml', 'pack.mcmeta', "${mod_id}.mixins.json".toString()]
+def intoTargets = ["$rootDir/out/production/resources/", "$rootDir/out/production/${project.name}.main/", "$rootDir/bin/main/"]
+def replaceProperties = [mod_id: mod_id, mod_name: mod_name, mod_version: mod_version,
+        mod_authors: mod_authors,
+        minecraft_version_range: minecraft_version_range, forge_version_range: forge_version_range,
+        loader_version_range: loader_version_range]
+processResources {
+    inputs.properties replaceProperties
+    replaceProperties.put 'project', project
+
+    filesMatching(resourceTargets) {
+        expand replaceProperties
+    }
+
+    intoTargets.each { target ->
+        if (file(target).exists()) {
+            copy {
+                from(sourceSets.main.resources) {
+                    include resourceTargets
+                    expand replaceProperties
+                }
+                into target
+            }
+        }
+    }
+}
+
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "infinitemusic",
-                "Specification-Vendor"    : "Frinn",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "Frinn",
+                "Specification-Title": mod_id,
+                "Specification-Vendor": mod_authors,
+                "Specification-Version": "1", // We are version 1 of ourselves
+                "Implementation-Title": project.name,
+                "Implementation-Version": mod_version,
+                "Implementation-Vendor": mod_authors,
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "infinitemusic.mixins.json"
+                "MixinConfigs": "${mod_id}.mixins.json"
         ])
     }
 }
@@ -190,22 +251,6 @@ publishing {
     repositories {
         maven {
             url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-if (System.getenv("CURSEFORGE")) {
-    curseforge {
-        apiKey = System.getenv("CURSEFORGE")
-        project {
-            id = "291713"
-            changelogType = "markdown"
-            changelog = "Updated to 1.17.1"
-            releaseType = "release"
-            addGameVersion '1.17.1'
-            mainArtifact(jar) {
-                displayName = "Infinite-Music-${project.version}-1.17.1"
-            }
         }
     }
 }

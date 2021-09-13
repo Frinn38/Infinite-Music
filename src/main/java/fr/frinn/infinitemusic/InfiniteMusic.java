@@ -1,6 +1,5 @@
 package fr.frinn.infinitemusic;
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.ProgressOption;
 import net.minecraft.client.gui.components.ImageButton;

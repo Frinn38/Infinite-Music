@@ -25,7 +25,7 @@ public class MusicTickerMixin {
     @Shadow
     private SoundInstance currentMusic;
 
-    @Overwrite(remap = false)
+    @Overwrite
     public void tick() {
         if(InfiniteMusic.pause) return;
 
