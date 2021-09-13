@@ -4,6 +4,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 import org.apache.commons.lang3.tuple.Pair;
 
 @Mod.EventBusSubscriber(modid = InfiniteMusic.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -19,7 +20,7 @@ public class ContinuousConfig {
     public static double musicTimer;
 
     @SubscribeEvent
-    public static void onModConfigEvent(final ModConfig.ModConfigEvent event) {
+    public static void onModConfigEvent(final ModConfigEvent event) {
         if(event.getConfig().getSpec() == CLIENT_SPEC)
             bakeConfig();
     }
