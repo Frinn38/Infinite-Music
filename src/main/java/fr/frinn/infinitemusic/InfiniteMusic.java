@@ -4,9 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.ProgressOption;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.screens.OptionsScreen;
+import net.minecraft.client.gui.screens.SoundOptionsScreen;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -39,12 +40,12 @@ public class InfiniteMusic {
 		ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> "1", (s, b) -> b));
 	}
 
-	public void guiOpened(GuiScreenEvent.InitGuiEvent event) {
-		if(event.getGui() instanceof OptionsScreen) {
-			event.addWidget(TIMER_LIMIT.createButton(mc.options, event.getGui().width / 2 + 5, event.getGui().height / 6 + 144 - 6, 150));
-			event.addWidget(new ImageButton(
-				event.getGui().width / 2 + 5 + 155,
-				event.getGui().height / 6 + 144 - 6,
+	public void guiOpened(ScreenEvent.InitScreenEvent event) {
+		if(event.getScreen() instanceof SoundOptionsScreen) {
+			event.addListener(TIMER_LIMIT.createButton(mc.options, event.getScreen().width / 2 + 5, event.getScreen().height / 6 + 104 - 6, 150));
+			event.addListener(new ImageButton(
+				event.getScreen().width / 2 + 5 + 155,
+				event.getScreen().height / 6 + 104 - 6,
 				20,
 				20,
 				0,
