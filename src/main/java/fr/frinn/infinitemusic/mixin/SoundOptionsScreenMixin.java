@@ -38,10 +38,10 @@ public class SoundOptionsScreenMixin extends GameOptionsScreen {
     @Inject(at = @At("HEAD"), method = "init()V")
     protected void init(CallbackInfo info) {
         int i = 11;
-        this.addDrawableChild(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 24 * (i >> 1), 150));
+        this.addDrawableChild(TIMER_LIMIT.createButton(MinecraftClient.getInstance().options, this.width / 2 - 155 + i % 2 * 160, this.height / 6 - 12 + 22 * (i >> 1), 150));
         this.addDrawableChild(new TexturedButtonWidget(
             this.width / 2 - 155 + i % 2 * 160 + 155,
-            this.height / 6 - 12 + 24 * (i >> 1),
+            this.height / 6 - 12 + 22 * (i >> 1),
             20,
             20,
             0,
