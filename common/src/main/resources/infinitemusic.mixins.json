@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "fr.frinn.infinitemusic.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "refmap": "infinitemusic.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+    "MusicManagerMixin",
+    "SoundOptionsScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

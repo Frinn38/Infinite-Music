@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+
+  "name": "${mod_title}",
+  "description": "${mod_description}",
+  "authors": ["${mod_authors}"],
+  "contact": {},
+
+  "license": "${mod_license}",
+  "icon": "${mod_icon_path}",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "fr.frinn.infinitemusic.InfiniteMusic"
+    ]
+  },
+
+  "mixins": [
+    "infinitemusic.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.8",
+    "fabric": "*",
+    "minecraft": "${minecraft_version_range_fabric}",
+    "java": ">=17"
+  }
+}

@@ -1,0 +1,28 @@
+/*
+###                                  ###
+### Be sure to review ALL of the     ###
+### data below, especially everwhere ###
+### that says modid!                 ###
+###                                  ###
+*/
+
+pluginManagement {
+    repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        maven {
+            name = 'Sponge'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
+        gradlePluginPortal()
+    }
+}
+
+// change this!
+rootProject.name = 'infinitemusic'
+
+// fabric forge and common folders, leave this as is
+include 'forge', 'fabric', 'common'
+
