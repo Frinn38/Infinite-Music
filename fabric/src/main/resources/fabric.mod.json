@@ -2,30 +2,32 @@
   "schemaVersion": 1,
   "id": "${mod_id}",
   "version": "${mod_version}",
-
   "name": "${mod_title}",
   "description": "${mod_description}",
-  "authors": ["${mod_authors}"],
-  "contact": {},
-
+  "authors": [
+    "${mod_author}"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/infinite-music",
+    "sources": "https://github.com/Frinn38/Infinite-Music"
+  },
   "license": "${mod_license}",
-  "icon": "${mod_icon_path}",
-
-  "environment": "client",
+  "icon": "icon.png",
+  "environment": "*",
   "entrypoints": {
     "client": [
-      "fr.frinn.infinitemusic.InfiniteMusic"
+      "fr.frinn.infinitemusic.fabric.InfiniteMusicImpl"
+    ],
+    "modmenu": [
+      "fr.frinn.infinitemusic.fabric.InfiniteMusicModMenuIntegration"
     ]
   },
-
   "mixins": [
     "infinitemusic.mixins.json"
   ],
-
   "depends": {
-    "fabricloader": ">=0.12.8",
     "fabric": "*",
-    "minecraft": "${minecraft_version_range_fabric}",
-    "java": ">=17"
+    "minecraft": ">=1.19",
+    "architectury": ">=5.5.18"
   }
 }

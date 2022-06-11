@@ -1,7 +1,6 @@
 {
   "pack": {
-    "description": "${mod_id} resources",
-    "pack_format": 7,
-    "_comment": ""
+    "description": "Infinite Music resources",
+    "pack_format": 8
   }
 }
