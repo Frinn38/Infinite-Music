@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.7.10",
+  "package": "fr.frinn.infinitemusic.mixin",
+  "compatibilityLevel": "JAVA_16",
+  "client": [
+    "MusicManagerMixin"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

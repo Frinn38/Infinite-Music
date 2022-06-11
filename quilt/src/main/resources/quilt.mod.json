@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "mixin": [
+    "infinitemusic.mixins.json",
+    "infinitemusic-common.mixins.json"
+  ],
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "${mod_id}",
+    "version": "${mod_version}",
+    "name": "${mod_title}",
+    "description": "${mod_description}",
+    "authors": ["${mod_author}"],
+    "contact": {
+      "sources": "https://github.com/Frinn38/Infinite-Music"
+    },
+    "license": "${mod_license}",
+    "icon": "assets/infinitemusic/icon.png",
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "environment": "*",
+    "entrypoints": {
+      "client": [
+        "fr.frinn.infinitemusic.quilt.InfiniteMusicImpl"
+      ]
+    },
+    "depends": [
+      {
+        "id": "minecraft",
+        "version": ">=1.19"
+      },
+      {
+        "id": "architectury",
+        "version": ">=5.5.18"
+      }
+    ]
+  }
+}
