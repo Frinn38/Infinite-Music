@@ -13,6 +13,6 @@ public class MusicManagerMixin {
 
     @Redirect(method = "tick", at = @At(value = "INVOKE", target = "Ljava/lang/Math;min(II)I", ordinal = 1))
     private int infinitemusic_removeMusicDelay(int nextSongDelay, int maxDelay) {
-        return Math.min(nextSongDelay, InfiniteMusic.getTimer());
+        return Math.min(nextSongDelay, InfiniteMusic.getTimer() * 20);
     }
 }

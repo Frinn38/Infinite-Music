@@ -1,5 +1,6 @@
 package fr.frinn.infinitemusic.fabric;
 
+import dev.architectury.event.events.client.ClientGuiEvent;
 import fr.frinn.infinitemusic.InfiniteMusic;
 import fr.frinn.infinitemusic.InfiniteMusicConfig;
 import me.shedaniel.autoconfig.AutoConfig;
@@ -13,6 +14,7 @@ public class InfiniteMusicImpl implements ClientModInitializer {
     public void onInitializeClient() {
         if(InfiniteMusic.isClothConfigLoaded())
             AutoConfig.register(InfiniteMusicConfig.class, Toml4jConfigSerializer::new);
+        ClientGuiEvent.DEBUG_TEXT_LEFT.register(InfiniteMusic::addDebugText);
     }
 
     public static boolean isClothConfigLoaded() {

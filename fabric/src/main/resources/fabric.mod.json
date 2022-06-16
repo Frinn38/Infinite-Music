@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "infinitemusic.mixins.json"
+    "infinitemusic-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",

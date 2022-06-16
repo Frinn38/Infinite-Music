@@ -4,7 +4,8 @@
   "package": "fr.frinn.infinitemusic.mixin",
   "compatibilityLevel": "JAVA_16",
   "client": [
-    "MusicManagerMixin"
+    "MusicManagerMixin",
+    "MusicManagerAccessor"
   ],
   "mixins": [
   ],

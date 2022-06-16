@@ -13,6 +13,9 @@ loom {
     forge {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
+        mixinConfigs = [
+                "infinitemusic-common.mixins.json"
+        ]
     }
 }
 
@@ -64,10 +67,6 @@ remapJar {
     classifier null
 }
 
-jar {
-    classifier "dev"
-}
-
 sourcesJar {
     def commonSources = project(":common").sourcesJar
     dependsOn commonSources
@@ -91,5 +90,25 @@ publishing {
     // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     repositories {
         // Add repositories to publish to here.
+    }
+}
+
+if (System.getenv("CURSEFORGE")) {
+    curseforge {
+        apiKey = System.getenv("CURSEFORGE")
+        project {
+            id = "291713"
+            addGameVersion "${project.minecraft_version}"
+            changelogType = "markdown"
+            changelog = "Fix mod doing nothing and add debug line on F3 screen."
+            releaseType = "release"
+            mainArtifact(remapJar) {
+                displayName = "[Forge]Infinite-Music-${project.mod_version}-${project.minecraft_version}"
+                relations {
+                    requiredDependency "architectury-api"
+                    optionalDependency "cloth-config"
+                }
+            }
+        }
     }
 }

@@ -1,3 +1,5 @@
 {
-  "text.autoconfig.infinitemusic.option.timer": "Time (in seconds) between two musics."
+  "text.autoconfig.infinitemusic.option.timer": "Time (in seconds) between two musics.",
+  "infinitemusic.debug.timer": "Time until next music: %s ticks.",
+  "infinitemusic.debug.music": "Current music: %s"
 }
